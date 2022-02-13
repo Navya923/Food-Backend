@@ -17,10 +17,11 @@ public class CartRepository implements PanacheRepository<Cart> {
         if (entity == null) {
             throw new NotFoundException();
         }
-        entity.quantity = cart.quantity;
+//        entity.quantity = cart.quantity;
         entity.persist();
         return entity;
     }
+
 
     public Cart postCart(Cart cart) {
         cart.persist();

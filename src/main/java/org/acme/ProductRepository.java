@@ -20,9 +20,10 @@ public class ProductRepository implements PanacheRepository<Product> {
         if (entity == null) {
             throw new NotFoundException();
         }
-        entity.title = product.title;
+        entity.name = product.name;
         entity.price = product.price;
         entity.quantity = product.quantity;
+
         entity.persist();
         return entity;
     }
@@ -36,6 +37,7 @@ public class ProductRepository implements PanacheRepository<Product> {
     public Product findProductById(long id) {
         return findById(id);
     }
+
 
     String findAndDelete(long id) {
         Product product = findById(id);
