@@ -34,10 +34,10 @@ public class CartServiceimpl implements CartService {
     }
 
 
-    @Transactional
-    public Cart updateCart(long id, Cart cart) {
-        return CartRepository.updateCart(id, cart);
-    }
+//    @Transactional
+//    public Cart updateCart(long id, Cart cart) {
+//        return CartRepository.updateCart(id, cart);
+//    }
 
 
     public Cart postCart(Cart cart) {

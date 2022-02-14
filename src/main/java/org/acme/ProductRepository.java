@@ -16,20 +16,20 @@ public class ProductRepository implements PanacheRepository<Product> {
     }
 
     public Product updateProduct(long id, Product product) {
-        Product entity = Product.findById(id);
+        Product entity = findById(id);
         if (entity == null) {
             throw new NotFoundException();
         }
-        entity.name = product.name;
-        entity.price = product.price;
-        entity.quantity = product.quantity;
+        entity.setName(product.getName());
+        entity.setPrice(product.getPrice());
+        entity.setQuantity(product.getQuantity());
 
-        entity.persist();
+        persist(entity);
         return entity;
     }
 
     public Product addProduct(Product product) {
-        product.persist();
+        persist(product);
         return product;
     }
 
@@ -38,10 +38,14 @@ public class ProductRepository implements PanacheRepository<Product> {
         return findById(id);
     }
 
+    @Transactional
+    public List<Product> findProductByrestaurantId(long restaurantId) {
+        return list("restaurantId", restaurantId);
+    }
 
     String findAndDelete(long id) {
         Product product = findById(id);
-        if (product.isPersistent()) {
+        if (isPersistent(product)) {
             if (deleteById(id)) {
                 return "Item is deleted with id" + id;
             }

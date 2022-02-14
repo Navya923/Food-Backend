@@ -40,6 +40,22 @@ public class ProductResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
+    public List<Product> findProducts() {
+        return Product.listAll();
+    }
+
+    @GET
+    @Path("restaurant/{restaurantId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public List<Product> findProductByrestaurantId(@PathParam("restaurantId") long restaurantId) {
+        return productService.findProductByrestaurantId(restaurantId);
+    }
+
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
     public List<Product> productWithquery() {
         return (List<Product>) productService.getProductItems();
     }

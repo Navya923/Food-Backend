@@ -16,7 +16,7 @@ public class RestaurantServiceimpl implements RestaurantService {
 
     @Transactional
     public List<Restaurant> getRestaurant() {
-        return Restaurant.listAll();
+        return RestaurantRepository.listAll();
     }
 
     @Transactional

@@ -9,7 +9,7 @@ public interface CartService {
 
     String postCart(List<Cart> cartItems);
 
-    Cart updateCart(long id, Cart cart);
+//    Cart updateCart(long id, Cart cart);
 
     String deleteCart(long id);
 

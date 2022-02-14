@@ -20,6 +20,11 @@ public class ProductServiceimpl implements ProductService {
         return Product.listAll();
     }
 
+    @Override
+    public List<Product> findProductByrestaurantId(long restaurantId) {
+        return ProductRepository.findProductByrestaurantId(restaurantId);
+    }
+
     @Transactional
     public Product findProductById(long id) {
         return ProductRepository.findProductById(id);

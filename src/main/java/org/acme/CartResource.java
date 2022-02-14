@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("/Cart")
@@ -13,22 +14,30 @@ public class CartResource {
     @Inject
     CartService cartService;
 
+//    @POST
+//    @Path("/cart")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Transactional
+//    public String addItemstoCart(List<Cart> cartItems) {
+//        return cartService.postCart(cartItems);
+//    }
+
     @POST
-    @Path("/cart")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Transactional
-    public String addItemstoCart(List<Cart> cartItems) {
-        return cartService.postCart(cartItems);
+    public Response createCart(CartService cartService){
+        Cart cart = CartRepository.addCart(cartService);
+        return Response.status(Response.Status.CREATED).entity(cart).build();
+
     }
 
-    @PUT
-    @Path("/cart/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Transactional
-    public Cart updateCart(@PathParam("id") long id, Cart cart) {
-        return cartService.updateCart(id, cart);
-    }
+
+//    @PUT
+//    @Path("/cart/{id}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    @Transactional
+//    public Cart updateCart(@PathParam("id") long id, Cart cart) {
+//        return cartService.updateCart(id, cart);
+//    }
 
     @GET
     @Path("/cart/{id}")

@@ -16,4 +16,5 @@ public interface ProductService {
 
     List<Product> getProductItems();
 
+    List<Product> findProductByrestaurantId(long restaurantId);
 }

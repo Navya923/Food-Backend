@@ -3,16 +3,20 @@ package org.acme;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Cart extends PanacheEntity {
 
-    private Integer Id;
+    public Cart() {
+    }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
-    private List<Product> productId;
+    public Cart(Long id) {
+        this.id = id;
+    }
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
     public Long getId() {
         return id;
