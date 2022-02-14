@@ -9,7 +9,7 @@ import java.util.List;
 public class ProductServiceimpl implements ProductService {
 
     @Inject
-    org.acme.ProductRepository ProductRepository;
+    org.acme.ProductRepository productRepository;
 
 
     public ProductServiceimpl() {
@@ -17,23 +17,23 @@ public class ProductServiceimpl implements ProductService {
     }
     @Transactional
     public List<Product> getProductItems() {
-        return Product.listAll();
+        return productRepository.listAll();
     }
 
     @Override
     public List<Product> findProductByrestaurantId(long restaurantId) {
-        return ProductRepository.findProductByrestaurantId(restaurantId);
+        return productRepository.findProductByrestaurantId(restaurantId);
     }
 
     @Transactional
     public Product findProductById(long id) {
-        return ProductRepository.findProductById(id);
+        return productRepository.findProductById(id);
     }
 
     @Override
     public String postProduct(List<Product> productItems) {
         for (Product product : productItems) {
-            product.persist();
+            productRepository.persist(product);
         }
         return "Items successfully added to cart";
     }
@@ -41,17 +41,17 @@ public class ProductServiceimpl implements ProductService {
 
     @Transactional
     public Product updateProduct(long id, Product product) {
-        return ProductRepository.updateProduct(id, product);
+        return productRepository.updateProduct(id, product);
     }
 
 
     public Product postProduct(Product product) {
-        product.persist();
+        productRepository.persist(product);
         return product;
     }
 
     @Transactional
     public String deleteProduct(long id) {
-        return ProductRepository.findAndDelete(id);
+        return productRepository.findAndDelete(id);
     }
 }

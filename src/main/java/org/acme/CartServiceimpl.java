@@ -9,7 +9,7 @@ import java.util.List;
 public class CartServiceimpl implements CartService {
 
     @Inject
-    CartRepository CartRepository;
+    CartRepository cartRepository;
 
 
     public CartServiceimpl() {
@@ -22,31 +22,55 @@ public class CartServiceimpl implements CartService {
 
     @Transactional
     public Cart findCartById(long id) {
-        return CartRepository.findCartById(id);
+        return cartRepository.findCartById(id);
     }
 
     @Override
     public String postCart(List<Cart> cartItems) {
-        for (Cart cart : cartItems) {
-            cart.persist();
-        }
-        return "Items successfully added to cart";
+        return null;
     }
 
 
-//    @Transactional
-//    public Cart updateCart(long id, Cart cart) {
-//        return CartRepository.updateCart(id, cart);
+//    @Override
+//    public String postCart(List<Cart> cartItems) {
+//        for (Cart cart : cartItems) {
+//            cart.persist();
+//        }
+//        return "Items successfully added to cart";
 //    }
 
+    /**
+     * Cart cart = cartrepo.find().firstResult();
+     * 2. if cart == null
+     *     cart = new Cart();
+     *     cart.persist();
+     *     cart.id save in product and change quantity to 1
+     *     if cart != null
+     *     cart.id save in product and change quantity to 1
+     * @param cart
+     * @return
+     */
 
     public Cart postCart(Cart cart) {
-        cart.persist();
-        return cart;
+        Cart cart1 = cartRepository.findAll().firstResult();
+        if (cart1 == null) {
+            cart.persist();
+
+        }
+        else {
+            List<Product> cartItems = cart1.getProducts();
+            Product product = cart.getProducts() .get(0);
+            cartItems.add(product);
+            cart1.setProducts(cartItems);
+            cart1.persist();
+
+        }
+        return cart1;
     }
+
 
     @Transactional
     public String deleteCart(long id) {
-        return CartRepository.findAndDelete(id);
+        return cartRepository.findAndDelete(id);
     }
 }

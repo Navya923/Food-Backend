@@ -41,7 +41,7 @@ public class ProductResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
     public List<Product> findProducts() {
-        return Product.listAll();
+        return productService.getProductItems();
     }
 
     @GET
