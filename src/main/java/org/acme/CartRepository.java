@@ -11,7 +11,7 @@ public class CartRepository implements PanacheRepository<Cart> {
 
 
     public Cart postCart(Cart cart) {
-        cart.persist();
+        persist(cart);
         return cart;
     }
 
@@ -22,7 +22,7 @@ public class CartRepository implements PanacheRepository<Cart> {
 
     String findAndDelete(long id) {
         Cart cart = findById(id);
-        if (cart.isPersistent()) {
+        if (isPersistent(cart)) {
             if (deleteById(id)) {
                 return "Item is deleted with id" + id;
             }

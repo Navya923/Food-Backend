@@ -3,31 +3,29 @@ package org.acme;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 import javax.persistence.*;
+
 import java.util.List;
 
-
 @Entity
-public class Cart extends PanacheEntity {
-    public List<Product> getProducts() {
-        return products;
-    }
+public class Cart {
+    @Id
+    @GeneratedValue
+    private Long id;
 
-    public Cart(List<Product> products) {
-        this.products = products;
-    }
+    @OneToOne
+    private Product product;
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
+    private int quantity;
 
     public Cart() {
+
     }
 
-    public Cart(Long id) {
+    public Cart(Long id, Product product, int quantity) {
         this.id = id;
+        this.product = product;
+        this.quantity = quantity;
     }
-@OneToMany(mappedBy = "cart", fetch=FetchType.EAGER)
-   private List<Product> products;
 
     public Long getId() {
         return id;
@@ -35,5 +33,21 @@ public class Cart extends PanacheEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

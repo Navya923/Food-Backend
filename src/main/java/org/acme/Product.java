@@ -19,7 +19,7 @@ public class Product  {
 
     private String discount;
 
-    public Product(Long id, String quantity, String price, String name, String discount, String URL, long restaurantId, String category, String topPick, Cart cart) {
+    public Product(Long id, String quantity, String price, String name, String discount, String URL, long restaurantId, String category, String topPick) {
         this.id = id;
         this.quantity = quantity;
         this.price = price;
@@ -29,7 +29,7 @@ public class Product  {
         this.restaurantId = restaurantId;
         this.category = category;
         this.topPick = topPick;
-        this.cart = cart;
+
     }
 
     public Product() {
@@ -101,13 +101,7 @@ public class Product  {
         this.topPick = topPick;
     }
 
-    public Cart getCart() {
-        return cart;
-    }
 
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
 
     public Long getId() {
         return id;
@@ -123,9 +117,7 @@ public class Product  {
 
     private String topPick;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
 
 
 }
+

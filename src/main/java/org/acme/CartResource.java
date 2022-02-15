@@ -22,22 +22,6 @@ public class CartResource {
         return cartService.postCart(cart);
     }
 
-//    @POST
-//    public Response createCart(CartService cartService){
-//        Cart cart = CartRepository.addCart(cartService);
-//        return Response.status(Response.Status.CREATED).entity(cart).build();
-//
-//    }
-
-
-//    @PUT
-//    @Path("/cart/{id}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    @Transactional
-//    public Cart updateCart(@PathParam("id") long id, Cart cart) {
-//        return cartService.updateCart(id, cart);
-//    }
-
     @GET
     @Path("/cart/{id}")
     @Produces(MediaType.APPLICATION_JSON)
